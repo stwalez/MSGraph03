@@ -78,6 +78,20 @@ namespace graphconsoleapp3
 
             Console.WriteLine("\nGraph Request:");
             Console.WriteLine(requestUserPhoto.GetHttpRequestMessage().RequestUri);
+
+            // request 2 - user's manager
+            var userId = "1b5192a2-fb1c-4cd5-914e-9d84e26b3507";
+            var requestUserManager = client.Users[userId]
+                                           .Manager
+                                           .Request();
+            var resultsUserManager = requestUserManager.GetAsync().Result;
+            Console.WriteLine("   User: " + userId);
+            Console.WriteLine("Manager: " + resultsUserManager.Id);
+            Console.WriteLine("Manager: " + (resultsUserManager as Microsoft.Graph.User).DisplayName);
+            Console.WriteLine(resultsUserManager.Id + ": " + (resultsUserManager as Microsoft.Graph.User).DisplayName + " <" + (resultsUserManager as Microsoft.Graph.User).Mail + ">");
+
+            Console.WriteLine("\nGraph Request:");
+            Console.WriteLine(requestUserManager.GetHttpRequestMessage().RequestUri);
         }
 
 
